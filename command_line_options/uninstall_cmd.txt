@@ -1,0 +1,23 @@
+UniFlash 5.0.0
+Usage:
+
+ --help                                      Display the list of valid options
+
+ --version                                   Display product information
+
+ --debuglevel <debuglevel>                   Debug information level of verbosity
+                                             Default: 2
+                                             Allowed: 0 1 2 3 4
+
+ --mode <mode>                               Installation mode
+                                             Default: win32
+                                             Allowed: win32 unattended
+
+ --debugtrace <debugtrace>                   Debug filename
+                                             Default: 
+
+ --installer-language <installer-language>   Language selection
+                                             Default: en
+                                             Allowed: sq ar es_AR az eu pt_BR bg ca hr cs da nl en et fi fr de el he hu id it ja kk ko lv lt no fa pl pt ro ru sr zh_CN sk sl es sv th zh_TW tr tk va vi cy
+
+

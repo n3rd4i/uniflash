@@ -33,6 +33,9 @@ let them know the package is no longer updating correctly.
   </description>
     <releaseNotes>http://processors.wiki.ti.com/index.php?title=CCS_UniFlash_Release_Notes_Latest</releaseNotes>
     <!-- =============================== -->
+    <dependencies>
+      <dependency id="autohotkey.portable"  />
+    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

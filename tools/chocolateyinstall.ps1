@@ -1,11 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'; # stop on all errors
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-
-# This is needed for unattended installation of Texas Instruments Drivers
-& "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_1.cer"
-& "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_2.cer"
-& "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_3.cer"
-& "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_4.cer"
+. "$toolsDir\helper.ps1"
 
 $url        = 'http://software-dl.ti.com/ccs/esd/uniflash/uniflash_sl.5.0.0.2289.exe'
 $packageArgs = @{
@@ -19,4 +14,22 @@ $packageArgs = @{
   silentArgs    = "--unattendedmodeui minimal --mode unattended"
   validExitCodes= @(0, 3010, 1641)
 }
-Install-ChocolateyPackage @packageArgs # https://chocolatey.org/docs/helpers-install-chocolatey-package
+
+$certificates = @{
+  C76E488AFC115AD09DA669CBE413316FE56E9438 = 'CN=Texas Instruments, OU=WCS, O=Texas Instruments, L=Dallas, S=Texas, C=US';
+  BCCCF26267CEE6B58B3818782D26F4307BCB6A4F = 'CN=Texas Instruments Inc, OU=Stellaris MCU, OU=Digital ID Class 3 - Microsoft Software Validation v2, O=Texas Instruments Inc, L=Austin, S=Texas, C=US';
+  EE0C8BA018CE926432C3CC23523A34073D01954A = 'CN=Texas Instruments Incorporated, OU=Digital ID Class 3 - Microsoft Software Validation v2, O=Texas Instruments Incorporated, L=Dallas, S=Texas, C=US';
+  FEFF132CF126562676138326AD817697BC5F81D6 = 'CN=Texas Instruments Incorporated, O=Texas Instruments Incorporated, L=Sugar Land, S=Texas, C=US';
+}
+# foreach($key in $certificates.Keys){ dir Cert:\CurrentUser\TrustedPublisher\ -Recurse | ? thumbprint -match $key | Remove-Item -WhatIf }
+$installedCertificates = foreach($key in $certificates.Keys){ Get-ChildItem Cert:\CurrentUser\TrustedPublisher\|Where thumbprint -eq $key }
+$nbrNeededCertificates = $certificates.count - $installedCertificates.count
+if ($nbrNeededCertificates) {
+  $ahkProc = Start-Ahk('chocolateyInstallCertificate.ahk')
+}
+
+Install-ChocolateyPackage @packageArgs
+
+# minimum delay to ensure the autohotkey takes efect
+& Start-Sleep 1
+if (Get-Process -id $ahkProc.Id -ErrorAction SilentlyContinue) {Stop-Process -id $ahkProc.Id}

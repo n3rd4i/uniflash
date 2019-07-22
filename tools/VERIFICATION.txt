@@ -1,0 +1,45 @@
+﻿
+VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+ 
+<Include details of how to verify checksum contents>
+== Uniflash package source ==
+1. Calculate sha1 checksum for each certificate and store that in a log file
+%chocolateyinstall%\tools\checksum.exe -t sha1 tools\certificates\driver_ti_1.cer >> certs_verif.log
+%chocolateyinstall%\tools\checksum.exe -t sha1 tools\certificates\driver_ti_2.cer >> certs_verif.log
+%chocolateyinstall%\tools\checksum.exe -t sha1 tools\certificates\driver_ti_3.cer >> certs_verif.log
+%chocolateyinstall%\tools\checksum.exe -t sha1 tools\certificates\driver_ti_4.cer >> certs_verif.log
+
+== Chocolatey Test Environment ==
+1. Clone the `Chocolatey Testing Environment` as specified here:
+- https://chocolatey.org/docs/create-packages#testing-your-package
+
+2. Clone the Uniflash source repository into the `Chocolatey Testing Environment` `packages` folder:
+```cmd
+git clone git@github.com:chocolatey-community/chocolatey-test-environment.git
+cd chocolatey-test-environment\packages
+git clone git@github.com:n3rd4i/uniflash.git
+```
+
+3. Comment all the lines which install the needed certificates from the chocolatey package source, powershell comment with '#':
+- edit file "uniflash\tools\chocolateyinstall.ps1"
+```
+# This is needed for unattended installation of Texas Instruments Drivers
+# & "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_1.cer"
+# & "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_2.cer"
+# & "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_3.cer"
+# & "C:\Windows\System32\certutil.exe" -addstore "TrustedPublisher" "$toolsDir\certificates\driver_ti_4.cer"
+```
+
+4. Install the chocolatey package manually in Chocolatey Test Environment:
+- after the installation is almost done, there are 4 certificates pending user acceptance in VM
+- accept each one pressing "Install"
+
+5. After certificates are accepted installation should be successfully, then:
+- open powershell (since your are in Chocolatey Test Environment it will start as Administrator, intended)
+- command: `dir cert:LocalMachine\TrustedPublisher | findstr "Texas Instruments"`
+
+6. Compare the sha1 checksums from, they should match:
+- the step "Uniflash package source" step 1.
+- the step "Chocolatey Test Environment" step 5.

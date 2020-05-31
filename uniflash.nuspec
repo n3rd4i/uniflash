@@ -3,25 +3,25 @@
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>uniflash</id>
-    <version>5.1.0.2397</version>
+    <version>6.4.0</version>
     <packageSourceUrl>https://github.com/n3rd4i/uniflash.git</packageSourceUrl>
-    <owners>Andrei</owners>
+    <owners>n3rd4i</owners>
     <!-- ============================== -->
 
     <!-- == SOFTWARE SPECIFIC SECTION == -->
-    <title>uniflash (Install)</title>
+    <title>Uniflash</title>
     <authors>Texas Instruments</authors>
     <!-- projectUrl is required for the community feed -->
-    <projectUrl>http://www.ti.com/tool/UNIFLASH</projectUrl>
+    <projectUrl>http://www.ti.com/tool/download/UNIFLASH</projectUrl>
     <iconUrl>https://dl1.cbsistatic.com/i/2018/02/06/be24115f-1aec-4c93-b03b-9de131c31e57/89e02c6c5c1995590f52eeb6779d4bf0/iconimg111029.png</iconUrl>
     <copyright>2019 Uniflash TI</copyright>
     <!-- If there is a license Url available, it is required for the community feed -->
-    <licenseUrl>http://www.ti.com/corp/docs/legal/termsofuse.shtml</licenseUrl>
+    <licenseUrl>http://www.ti.com/legal/terms-of-use.html</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <!--<projectSourceUrl>Software Source Location - is the software FOSS somewhere? Link to it with this</projectSourceUrl>-->
-    <docsUrl>http://software-dl.ti.com/ccs/esd/uniflash/docs/v5_0/quick_start_guide/uniflash_quick_start_guide.html</docsUrl>
-    <mailingListUrl>http://e2e.ti.com/support/development_tools/code_composer_studio/default.aspx</mailingListUrl>
-    <bugTrackerUrl>http://e2e.ti.com/support/development_tools/code_composer_studio/default.aspx</bugTrackerUrl>
+    <docsUrl>http://software-dl.ti.com/ccs/esd/uniflash/docs/v6_0/uniflash_quick_start_guide.html</docsUrl>
+    <mailingListUrl>https://e2e.ti.com/support/tools/ccs</mailingListUrl>
+    <bugTrackerUrl>https://e2e.ti.com/support/tools/ccs</bugTrackerUrl>
     <tags>uniflash</tags>
     <summary>Uniflash tool</summary>
     <description>Uniflash is a tool for flashing firmware to TI specific chips.
@@ -31,10 +31,10 @@ out of date by more than a day or two, please contact the maintainer(s) and
 let them know the package is no longer updating correctly.
 
   </description>
-    <releaseNotes>http://processors.wiki.ti.com/index.php?title=CCS_UniFlash_Release_Notes_Latest</releaseNotes>
+    <releaseNotes>http://software-dl.ti.com/ccs/esd/uniflash/docs/v6_0/release_notes_6.0.0.html</releaseNotes>
     <!-- =============================== -->
     <dependencies>
-      <dependency id="autohotkey.portable"  />
+      <dependency id="autohotkey.portable" version="1.1.32" />
     </dependencies>
   </metadata>
   <files>

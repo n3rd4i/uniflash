@@ -2,14 +2,14 @@
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 . "$(Join-Path $toolsDir helper.ps1)"
 
-$url        = 'https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/7.2.0/uniflash_sl.7.2.0.3893.exe'
+$url        = 'https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/8.8.1/uniflash_sl.8.8.1.4983.exe'
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
   fileType      = 'exe'
   url           = $url
   softwareName  = 'uniflash*'
-  checksum      = '3d83947264b1656034f4b413b8c4de58'
+  checksum      = '66b6f2102b9787a2c204018fd698db97'
   checksumType  = 'md5'
   silentArgs    = "--unattendedmodeui minimal --mode unattended"
   validExitCodes= @(0, 3010, 1641)
